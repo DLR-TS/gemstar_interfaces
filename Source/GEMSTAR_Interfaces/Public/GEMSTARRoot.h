@@ -89,29 +89,23 @@ public:
 	bool IniLoaded = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseSUMO = false;
+	bool UseSUMO = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseESMINI = false;
+	bool UseESMINI = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseTrafficLight = false;
+	bool UseVehicles = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseLog = false;
+	bool UseCamera = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseROS = false;
+	bool UseLidar = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseSimVehicles = false;
+	bool UseLog = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseCamera = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseLidar = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GEMSTAR")
-	bool UseVisualizer = false;
+	bool UseVisualizer = true;
 };

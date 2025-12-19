@@ -22,11 +22,11 @@ Add the plugin to your Unreal project:
 mkdir Plugins
 cd Plugins
 
-git clone <this repo>
+git clone https://github.com/DLR-TS/gemstar_interfaces.git
 ```
 or:
 ```sh
-git submodule add <this repo>
+git submodule add https://github.com/DLR-TS/gemstar_interfaces.git
 ```
 
 # Configuration
