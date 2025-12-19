@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "GEMSTAR_Interfaces",
+	"Description": "Basic interfaces of GEMSTAR",
+	"Category": "GEMSTAR",
+	"CreatedBy": "DLR-TS",
+	"CreatedByURL": "https://www.dlr.de/en/ts",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "GEMSTAR_Interfaces",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
