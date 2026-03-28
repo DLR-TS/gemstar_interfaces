@@ -27,6 +27,8 @@ public class GEMSTAR_Interfaces : ModuleRules
         string ProtobufIncludeBasePath = Path.Combine(ProtobufBasePath, "include");
 
         PublicDefinitions.Add("GOOGLE_PROTOBUF_NO_RTTI");
+        PublicDefinitions.Add("GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL_INLINE=0");
+        bEnableUndefinedIdentifierWarnings = false;
 
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
@@ -38,9 +40,20 @@ public class GEMSTAR_Interfaces : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
+            // OSI static lib (built from source, placed in ThirdParty tree)
+            PublicAdditionalLibraries.Add(Path.Combine(Osi3LibPath, "libopen_simulation_interface_static.a"));
 
-            //PublicAdditionalLibraries.Add(Path.Combine(OsiPath, "lib", "libasam_osilib.a"));
-            //PublicAdditionalLibraries.Add("stdc++");
+            // Protobuf 3.21.12 (built from source into ~/local/protobuf-3.21.12)
+            string ProtobufLocalLib = Path.Combine(
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile),
+                "local", "protobuf-3.21.12", "lib");
+            PublicAdditionalLibraries.Add(Path.Combine(ProtobufLocalLib, "libprotobuf.a"));
+
+            // Use local protobuf headers (system version is too old)
+            string ProtobufLocalInclude = Path.Combine(
+                System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile),
+                "local", "protobuf-3.21.12", "include");
+            PublicIncludePaths.Add(ProtobufLocalInclude);
         }
         else if (Target.Platform == UnrealTargetPlatform.Mac)
         {
