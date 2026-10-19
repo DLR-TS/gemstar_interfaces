@@ -314,24 +314,32 @@ enum MovingObject_VehicleClassification_Type : int {
   MovingObject_VehicleClassification_Type_TYPE_OTHER = 1,
   MovingObject_VehicleClassification_Type_TYPE_SMALL_CAR = 2,
   MovingObject_VehicleClassification_Type_TYPE_COMPACT_CAR = 3,
+  MovingObject_VehicleClassification_Type_TYPE_CAR = 4,
   MovingObject_VehicleClassification_Type_TYPE_MEDIUM_CAR = 4,
   MovingObject_VehicleClassification_Type_TYPE_LUXURY_CAR = 5,
   MovingObject_VehicleClassification_Type_TYPE_DELIVERY_VAN = 6,
+  MovingObject_VehicleClassification_Type_TYPE_VAN = 6,
   MovingObject_VehicleClassification_Type_TYPE_HEAVY_TRUCK = 7,
   MovingObject_VehicleClassification_Type_TYPE_SEMITRACTOR = 16,
   MovingObject_VehicleClassification_Type_TYPE_SEMITRAILER = 8,
   MovingObject_VehicleClassification_Type_TYPE_TRAILER = 9,
   MovingObject_VehicleClassification_Type_TYPE_MOTORBIKE = 10,
+  MovingObject_VehicleClassification_Type_TYPE_MOTORCYCLE = 10,
   MovingObject_VehicleClassification_Type_TYPE_BICYCLE = 11,
   MovingObject_VehicleClassification_Type_TYPE_BUS = 12,
   MovingObject_VehicleClassification_Type_TYPE_TRAM = 13,
   MovingObject_VehicleClassification_Type_TYPE_TRAIN = 14,
   MovingObject_VehicleClassification_Type_TYPE_WHEELCHAIR = 15,
-  MovingObject_VehicleClassification_Type_TYPE_STANDUP_SCOOTER = 17
+  MovingObject_VehicleClassification_Type_TYPE_STANDUP_SCOOTER = 17,
+  MovingObject_VehicleClassification_Type_TYPE_MICROMOBILITY_DEVICE = 18,
+  MovingObject_VehicleClassification_Type_TYPE_WORK_MACHINE = 19,
+  MovingObject_VehicleClassification_Type_TYPE_WATERCRAFT = 20,
+  MovingObject_VehicleClassification_Type_TYPE_AIRCRAFT = 21,
+  MovingObject_VehicleClassification_Type_TYPE_LAND_VEHICLE = 22
 };
 bool MovingObject_VehicleClassification_Type_IsValid(int value);
 constexpr MovingObject_VehicleClassification_Type MovingObject_VehicleClassification_Type_Type_MIN = MovingObject_VehicleClassification_Type_TYPE_UNKNOWN;
-constexpr MovingObject_VehicleClassification_Type MovingObject_VehicleClassification_Type_Type_MAX = MovingObject_VehicleClassification_Type_TYPE_STANDUP_SCOOTER;
+constexpr MovingObject_VehicleClassification_Type MovingObject_VehicleClassification_Type_Type_MAX = MovingObject_VehicleClassification_Type_TYPE_LAND_VEHICLE;
 constexpr int MovingObject_VehicleClassification_Type_Type_ARRAYSIZE = MovingObject_VehicleClassification_Type_Type_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MovingObject_VehicleClassification_Type_descriptor();
@@ -2448,6 +2456,7 @@ class MovingObject_VehicleClassification_LightState final :
     kLicensePlateIlluminationRearFieldNumber = 8,
     kEmergencyVehicleIlluminationFieldNumber = 9,
     kServiceVehicleIlluminationFieldNumber = 10,
+    kTailLightFieldNumber = 11,
   };
   // optional .osi3.MovingObject.VehicleClassification.LightState.IndicatorState indicator_state = 1;
   bool has_indicator_state() const;
@@ -2579,6 +2588,19 @@ class MovingObject_VehicleClassification_LightState final :
   void _internal_set_service_vehicle_illumination(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState value);
   public:
 
+  // optional .osi3.MovingObject.VehicleClassification.LightState.GenericLightState tail_light = 11;
+  bool has_tail_light() const;
+  private:
+  bool _internal_has_tail_light() const;
+  public:
+  void clear_tail_light();
+  ::osi3::MovingObject_VehicleClassification_LightState_GenericLightState tail_light() const;
+  void set_tail_light(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState value);
+  private:
+  ::osi3::MovingObject_VehicleClassification_LightState_GenericLightState _internal_tail_light() const;
+  void _internal_set_tail_light(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState value);
+  public:
+
   // @@protoc_insertion_point(class_scope:osi3.MovingObject.VehicleClassification.LightState)
  private:
   class _Internal;
@@ -2599,6 +2621,7 @@ class MovingObject_VehicleClassification_LightState final :
     int license_plate_illumination_rear_;
     int emergency_vehicle_illumination_;
     int service_vehicle_illumination_;
+    int tail_light_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_osi_5fobject_2eproto;
@@ -2741,12 +2764,16 @@ class MovingObject_VehicleClassification final :
     MovingObject_VehicleClassification_Type_TYPE_SMALL_CAR;
   static constexpr Type TYPE_COMPACT_CAR =
     MovingObject_VehicleClassification_Type_TYPE_COMPACT_CAR;
+  static constexpr Type TYPE_CAR =
+    MovingObject_VehicleClassification_Type_TYPE_CAR;
   static constexpr Type TYPE_MEDIUM_CAR =
     MovingObject_VehicleClassification_Type_TYPE_MEDIUM_CAR;
   static constexpr Type TYPE_LUXURY_CAR =
     MovingObject_VehicleClassification_Type_TYPE_LUXURY_CAR;
   static constexpr Type TYPE_DELIVERY_VAN =
     MovingObject_VehicleClassification_Type_TYPE_DELIVERY_VAN;
+  static constexpr Type TYPE_VAN =
+    MovingObject_VehicleClassification_Type_TYPE_VAN;
   static constexpr Type TYPE_HEAVY_TRUCK =
     MovingObject_VehicleClassification_Type_TYPE_HEAVY_TRUCK;
   static constexpr Type TYPE_SEMITRACTOR =
@@ -2757,6 +2784,8 @@ class MovingObject_VehicleClassification final :
     MovingObject_VehicleClassification_Type_TYPE_TRAILER;
   static constexpr Type TYPE_MOTORBIKE =
     MovingObject_VehicleClassification_Type_TYPE_MOTORBIKE;
+  static constexpr Type TYPE_MOTORCYCLE =
+    MovingObject_VehicleClassification_Type_TYPE_MOTORCYCLE;
   static constexpr Type TYPE_BICYCLE =
     MovingObject_VehicleClassification_Type_TYPE_BICYCLE;
   static constexpr Type TYPE_BUS =
@@ -2769,6 +2798,16 @@ class MovingObject_VehicleClassification final :
     MovingObject_VehicleClassification_Type_TYPE_WHEELCHAIR;
   static constexpr Type TYPE_STANDUP_SCOOTER =
     MovingObject_VehicleClassification_Type_TYPE_STANDUP_SCOOTER;
+  static constexpr Type TYPE_MICROMOBILITY_DEVICE =
+    MovingObject_VehicleClassification_Type_TYPE_MICROMOBILITY_DEVICE;
+  static constexpr Type TYPE_WORK_MACHINE =
+    MovingObject_VehicleClassification_Type_TYPE_WORK_MACHINE;
+  static constexpr Type TYPE_WATERCRAFT =
+    MovingObject_VehicleClassification_Type_TYPE_WATERCRAFT;
+  static constexpr Type TYPE_AIRCRAFT =
+    MovingObject_VehicleClassification_Type_TYPE_AIRCRAFT;
+  static constexpr Type TYPE_LAND_VEHICLE =
+    MovingObject_VehicleClassification_Type_TYPE_LAND_VEHICLE;
   static inline bool Type_IsValid(int value) {
     return MovingObject_VehicleClassification_Type_IsValid(value);
   }
@@ -5925,6 +5964,35 @@ inline void MovingObject_VehicleClassification_LightState::_internal_set_reversi
 inline void MovingObject_VehicleClassification_LightState::set_reversing_light(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState value) {
   _internal_set_reversing_light(value);
   // @@protoc_insertion_point(field_set:osi3.MovingObject.VehicleClassification.LightState.reversing_light)
+}
+
+// optional .osi3.MovingObject.VehicleClassification.LightState.GenericLightState tail_light = 11;
+inline bool MovingObject_VehicleClassification_LightState::_internal_has_tail_light() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
+  return value;
+}
+inline bool MovingObject_VehicleClassification_LightState::has_tail_light() const {
+  return _internal_has_tail_light();
+}
+inline void MovingObject_VehicleClassification_LightState::clear_tail_light() {
+  _impl_.tail_light_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000400u;
+}
+inline ::osi3::MovingObject_VehicleClassification_LightState_GenericLightState MovingObject_VehicleClassification_LightState::_internal_tail_light() const {
+  return static_cast< ::osi3::MovingObject_VehicleClassification_LightState_GenericLightState >(_impl_.tail_light_);
+}
+inline ::osi3::MovingObject_VehicleClassification_LightState_GenericLightState MovingObject_VehicleClassification_LightState::tail_light() const {
+  // @@protoc_insertion_point(field_get:osi3.MovingObject.VehicleClassification.LightState.tail_light)
+  return _internal_tail_light();
+}
+inline void MovingObject_VehicleClassification_LightState::_internal_set_tail_light(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState value) {
+  assert(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState_IsValid(value));
+  _impl_._has_bits_[0] |= 0x00000400u;
+  _impl_.tail_light_ = value;
+}
+inline void MovingObject_VehicleClassification_LightState::set_tail_light(::osi3::MovingObject_VehicleClassification_LightState_GenericLightState value) {
+  _internal_set_tail_light(value);
+  // @@protoc_insertion_point(field_set:osi3.MovingObject.VehicleClassification.LightState.tail_light)
 }
 
 // optional .osi3.MovingObject.VehicleClassification.LightState.BrakeLightState brake_light_state = 7;

@@ -704,6 +704,7 @@ class RoadMarking final :
 
   enum : int {
     kSourceReferenceFieldNumber = 4,
+    kModelReferenceFieldNumber = 6,
     kIdFieldNumber = 1,
     kBaseFieldNumber = 2,
     kClassificationFieldNumber = 3,
@@ -726,6 +727,24 @@ class RoadMarking final :
   ::osi3::ExternalReference* add_source_reference();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::ExternalReference >&
       source_reference() const;
+
+  // optional string model_reference = 6;
+  bool has_model_reference() const;
+  private:
+  bool _internal_has_model_reference() const;
+  public:
+  void clear_model_reference();
+  const std::string& model_reference() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_model_reference(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_model_reference();
+  PROTOBUF_NODISCARD std::string* release_model_reference();
+  void set_allocated_model_reference(std::string* model_reference);
+  private:
+  const std::string& _internal_model_reference() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_model_reference(const std::string& value);
+  std::string* _internal_mutable_model_reference();
+  public:
 
   // optional .osi3.Identifier id = 1;
   bool has_id() const;
@@ -810,6 +829,7 @@ class RoadMarking final :
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::ExternalReference > source_reference_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr model_reference_;
     ::osi3::Identifier* id_;
     ::osi3::BaseStationary* base_;
     ::osi3::RoadMarking_Classification* classification_;
@@ -1451,7 +1471,7 @@ RoadMarking_Classification::logical_lane_assignment() const {
 
 // optional .osi3.Identifier id = 1;
 inline bool RoadMarking::_internal_has_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.id_ != nullptr);
   return value;
 }
@@ -1474,14 +1494,14 @@ inline void RoadMarking::unsafe_arena_set_allocated_id(
   }
   _impl_.id_ = id;
   if (id) {
-    _impl_._has_bits_[0] |= 0x00000001u;
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.RoadMarking.id)
 }
 inline ::osi3::Identifier* RoadMarking::release_id() {
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::osi3::Identifier* temp = _impl_.id_;
   _impl_.id_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -1497,13 +1517,13 @@ inline ::osi3::Identifier* RoadMarking::release_id() {
 }
 inline ::osi3::Identifier* RoadMarking::unsafe_arena_release_id() {
   // @@protoc_insertion_point(field_release:osi3.RoadMarking.id)
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::osi3::Identifier* temp = _impl_.id_;
   _impl_.id_ = nullptr;
   return temp;
 }
 inline ::osi3::Identifier* RoadMarking::_internal_mutable_id() {
-  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.id_ == nullptr) {
     auto* p = CreateMaybeMessage<::osi3::Identifier>(GetArenaForAllocation());
     _impl_.id_ = p;
@@ -1528,9 +1548,9 @@ inline void RoadMarking::set_allocated_id(::osi3::Identifier* id) {
       id = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, id, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000001u;
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.id_ = id;
   // @@protoc_insertion_point(field_set_allocated:osi3.RoadMarking.id)
@@ -1538,7 +1558,7 @@ inline void RoadMarking::set_allocated_id(::osi3::Identifier* id) {
 
 // optional .osi3.BaseStationary base = 2;
 inline bool RoadMarking::_internal_has_base() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.base_ != nullptr);
   return value;
 }
@@ -1561,14 +1581,14 @@ inline void RoadMarking::unsafe_arena_set_allocated_base(
   }
   _impl_.base_ = base;
   if (base) {
-    _impl_._has_bits_[0] |= 0x00000002u;
+    _impl_._has_bits_[0] |= 0x00000004u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_._has_bits_[0] &= ~0x00000004u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.RoadMarking.base)
 }
 inline ::osi3::BaseStationary* RoadMarking::release_base() {
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
   ::osi3::BaseStationary* temp = _impl_.base_;
   _impl_.base_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -1584,13 +1604,13 @@ inline ::osi3::BaseStationary* RoadMarking::release_base() {
 }
 inline ::osi3::BaseStationary* RoadMarking::unsafe_arena_release_base() {
   // @@protoc_insertion_point(field_release:osi3.RoadMarking.base)
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
   ::osi3::BaseStationary* temp = _impl_.base_;
   _impl_.base_ = nullptr;
   return temp;
 }
 inline ::osi3::BaseStationary* RoadMarking::_internal_mutable_base() {
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   if (_impl_.base_ == nullptr) {
     auto* p = CreateMaybeMessage<::osi3::BaseStationary>(GetArenaForAllocation());
     _impl_.base_ = p;
@@ -1615,9 +1635,9 @@ inline void RoadMarking::set_allocated_base(::osi3::BaseStationary* base) {
       base = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, base, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000002u;
+    _impl_._has_bits_[0] |= 0x00000004u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_._has_bits_[0] &= ~0x00000004u;
   }
   _impl_.base_ = base;
   // @@protoc_insertion_point(field_set_allocated:osi3.RoadMarking.base)
@@ -1625,7 +1645,7 @@ inline void RoadMarking::set_allocated_base(::osi3::BaseStationary* base) {
 
 // optional .osi3.RoadMarking.Classification classification = 3;
 inline bool RoadMarking::_internal_has_classification() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.classification_ != nullptr);
   return value;
 }
@@ -1634,7 +1654,7 @@ inline bool RoadMarking::has_classification() const {
 }
 inline void RoadMarking::clear_classification() {
   if (_impl_.classification_ != nullptr) _impl_.classification_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const ::osi3::RoadMarking_Classification& RoadMarking::_internal_classification() const {
   const ::osi3::RoadMarking_Classification* p = _impl_.classification_;
@@ -1652,14 +1672,14 @@ inline void RoadMarking::unsafe_arena_set_allocated_classification(
   }
   _impl_.classification_ = classification;
   if (classification) {
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.RoadMarking.classification)
 }
 inline ::osi3::RoadMarking_Classification* RoadMarking::release_classification() {
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
   ::osi3::RoadMarking_Classification* temp = _impl_.classification_;
   _impl_.classification_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -1675,13 +1695,13 @@ inline ::osi3::RoadMarking_Classification* RoadMarking::release_classification()
 }
 inline ::osi3::RoadMarking_Classification* RoadMarking::unsafe_arena_release_classification() {
   // @@protoc_insertion_point(field_release:osi3.RoadMarking.classification)
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
   ::osi3::RoadMarking_Classification* temp = _impl_.classification_;
   _impl_.classification_ = nullptr;
   return temp;
 }
 inline ::osi3::RoadMarking_Classification* RoadMarking::_internal_mutable_classification() {
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   if (_impl_.classification_ == nullptr) {
     auto* p = CreateMaybeMessage<::osi3::RoadMarking_Classification>(GetArenaForAllocation());
     _impl_.classification_ = p;
@@ -1705,9 +1725,9 @@ inline void RoadMarking::set_allocated_classification(::osi3::RoadMarking_Classi
       classification = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, classification, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
   _impl_.classification_ = classification;
   // @@protoc_insertion_point(field_set_allocated:osi3.RoadMarking.classification)
@@ -1752,7 +1772,7 @@ RoadMarking::source_reference() const {
 
 // optional .osi3.ColorDescription color_description = 5;
 inline bool RoadMarking::_internal_has_color_description() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.color_description_ != nullptr);
   return value;
 }
@@ -1775,14 +1795,14 @@ inline void RoadMarking::unsafe_arena_set_allocated_color_description(
   }
   _impl_.color_description_ = color_description;
   if (color_description) {
-    _impl_._has_bits_[0] |= 0x00000008u;
+    _impl_._has_bits_[0] |= 0x00000010u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_._has_bits_[0] &= ~0x00000010u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.RoadMarking.color_description)
 }
 inline ::osi3::ColorDescription* RoadMarking::release_color_description() {
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
   ::osi3::ColorDescription* temp = _impl_.color_description_;
   _impl_.color_description_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -1798,13 +1818,13 @@ inline ::osi3::ColorDescription* RoadMarking::release_color_description() {
 }
 inline ::osi3::ColorDescription* RoadMarking::unsafe_arena_release_color_description() {
   // @@protoc_insertion_point(field_release:osi3.RoadMarking.color_description)
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
   ::osi3::ColorDescription* temp = _impl_.color_description_;
   _impl_.color_description_ = nullptr;
   return temp;
 }
 inline ::osi3::ColorDescription* RoadMarking::_internal_mutable_color_description() {
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000010u;
   if (_impl_.color_description_ == nullptr) {
     auto* p = CreateMaybeMessage<::osi3::ColorDescription>(GetArenaForAllocation());
     _impl_.color_description_ = p;
@@ -1829,12 +1849,80 @@ inline void RoadMarking::set_allocated_color_description(::osi3::ColorDescriptio
       color_description = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, color_description, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000008u;
+    _impl_._has_bits_[0] |= 0x00000010u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_._has_bits_[0] &= ~0x00000010u;
   }
   _impl_.color_description_ = color_description;
   // @@protoc_insertion_point(field_set_allocated:osi3.RoadMarking.color_description)
+}
+
+// optional string model_reference = 6;
+inline bool RoadMarking::_internal_has_model_reference() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool RoadMarking::has_model_reference() const {
+  return _internal_has_model_reference();
+}
+inline void RoadMarking::clear_model_reference() {
+  _impl_.model_reference_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& RoadMarking::model_reference() const {
+  // @@protoc_insertion_point(field_get:osi3.RoadMarking.model_reference)
+  return _internal_model_reference();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void RoadMarking::set_model_reference(ArgT0&& arg0, ArgT... args) {
+ _impl_._has_bits_[0] |= 0x00000001u;
+ _impl_.model_reference_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:osi3.RoadMarking.model_reference)
+}
+inline std::string* RoadMarking::mutable_model_reference() {
+  std::string* _s = _internal_mutable_model_reference();
+  // @@protoc_insertion_point(field_mutable:osi3.RoadMarking.model_reference)
+  return _s;
+}
+inline const std::string& RoadMarking::_internal_model_reference() const {
+  return _impl_.model_reference_.Get();
+}
+inline void RoadMarking::_internal_set_model_reference(const std::string& value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.model_reference_.Set(value, GetArenaForAllocation());
+}
+inline std::string* RoadMarking::_internal_mutable_model_reference() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.model_reference_.Mutable(GetArenaForAllocation());
+}
+inline std::string* RoadMarking::release_model_reference() {
+  // @@protoc_insertion_point(field_release:osi3.RoadMarking.model_reference)
+  if (!_internal_has_model_reference()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.model_reference_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.model_reference_.IsDefault()) {
+    _impl_.model_reference_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
+}
+inline void RoadMarking::set_allocated_model_reference(std::string* model_reference) {
+  if (model_reference != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.model_reference_.SetAllocated(model_reference, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.model_reference_.IsDefault()) {
+    _impl_.model_reference_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:osi3.RoadMarking.model_reference)
 }
 
 #ifdef __GNUC__

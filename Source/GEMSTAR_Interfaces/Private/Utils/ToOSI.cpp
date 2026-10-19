@@ -1,5 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+/*
+ * Copyright (c) 2026 DLR e.V.
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 
 #include "Utils/ToOSI.h"
 
@@ -55,12 +62,12 @@ osi3::BaseStationary* ToOSI::toOSIBaseStationary(const AActor* actor)
 
 		actor->GetActorBounds(false, Origin, Extent);
 
-		base->mutable_dimension()->set_height(Extent.Z);
-		base->mutable_dimension()->set_width(Extent.Y);
-		base->mutable_dimension()->set_length(Extent.X);
-		base->mutable_position()->set_z(Origin.Z);
-		base->mutable_position()->set_y(-Origin.Y);
-		base->mutable_position()->set_z(Origin.X);
+		base->mutable_dimension()->set_height(Extent.Z * 0.01);
+		base->mutable_dimension()->set_width(Extent.Y * 0.01);
+		base->mutable_dimension()->set_length(Extent.X * 0.01);
+		base->mutable_position()->set_z(Origin.Z * 0.01);
+		base->mutable_position()->set_y(-Origin.Y * 0.01);
+		base->mutable_position()->set_z(Origin.X * 0.01);
 
 		auto rotation = actor->GetActorRotation();
 
@@ -82,12 +89,12 @@ osi3::BaseMoving* ToOSI::toOSIBaseMoving(const AActor* actor)
 
 		actor->GetActorBounds(false, Origin, Extent);
 
-		base->mutable_dimension()->set_height(Extent.Z);
-		base->mutable_dimension()->set_width(Extent.Y);
-		base->mutable_dimension()->set_length(Extent.X);
-		base->mutable_position()->set_x(Origin.X);
-		base->mutable_position()->set_z(Origin.Z);
-		base->mutable_position()->set_y(-Origin.Y);
+		base->mutable_dimension()->set_height(Extent.Z * 0.01);
+		base->mutable_dimension()->set_width(Extent.Y * 0.01);
+		base->mutable_dimension()->set_length(Extent.X * 0.01);
+		base->mutable_position()->set_x(Origin.X * 0.01);
+		base->mutable_position()->set_y(-Origin.Y * 0.01);
+		base->mutable_position()->set_z(Origin.Z * 0.01);
 
 		auto rotation = actor->GetActorRotation();
 
@@ -120,8 +127,8 @@ osi3::MountingPosition* ToOSI::toMountingPosition(FSensorConfigData& sensorConfi
 	orientation->set_pitch(sensorConfigData.Offset.GetRotation().Y * PI / 180.0);
 	orientation->set_yaw(sensorConfigData.Offset.GetRotation().Z * PI / -180.0);
 	auto* position = mounting_position->mutable_position();
-	position->set_x(sensorConfigData.Offset.GetLocation().X);
-	position->set_y(-sensorConfigData.Offset.GetLocation().Y);
-	position->set_z(sensorConfigData.Offset.GetLocation().Z);
+	position->set_x(sensorConfigData.Offset.GetLocation().X * 0.01);
+	position->set_y(-sensorConfigData.Offset.GetLocation().Y * 0.01);
+	position->set_z(sensorConfigData.Offset.GetLocation().Z * 0.01);
 	return mounting_position;
 }

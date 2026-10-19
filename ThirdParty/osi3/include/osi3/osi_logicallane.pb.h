@@ -32,6 +32,8 @@
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "osi_common.pb.h"
+#include "osi_object.pb.h"
+#include "osi_trafficsign.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_osi_5flogicallane_2eproto
@@ -65,6 +67,18 @@ extern LogicalLane_LaneRelationDefaultTypeInternal _LogicalLane_LaneRelation_def
 class LogicalLane_PhysicalLaneReference;
 struct LogicalLane_PhysicalLaneReferenceDefaultTypeInternal;
 extern LogicalLane_PhysicalLaneReferenceDefaultTypeInternal _LogicalLane_PhysicalLaneReference_default_instance_;
+class LogicalLane_TrafficRule;
+struct LogicalLane_TrafficRuleDefaultTypeInternal;
+extern LogicalLane_TrafficRuleDefaultTypeInternal _LogicalLane_TrafficRule_default_instance_;
+class LogicalLane_TrafficRule_SpeedLimit;
+struct LogicalLane_TrafficRule_SpeedLimitDefaultTypeInternal;
+extern LogicalLane_TrafficRule_SpeedLimitDefaultTypeInternal _LogicalLane_TrafficRule_SpeedLimit_default_instance_;
+class LogicalLane_TrafficRule_TrafficRuleValidity;
+struct LogicalLane_TrafficRule_TrafficRuleValidityDefaultTypeInternal;
+extern LogicalLane_TrafficRule_TrafficRuleValidityDefaultTypeInternal _LogicalLane_TrafficRule_TrafficRuleValidity_default_instance_;
+class LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity;
+struct LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidityDefaultTypeInternal;
+extern LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidityDefaultTypeInternal _LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity_default_instance_;
 }  // namespace osi3
 PROTOBUF_NAMESPACE_OPEN
 template<> ::osi3::LogicalLane* Arena::CreateMaybeMessage<::osi3::LogicalLane>(Arena*);
@@ -73,6 +87,10 @@ template<> ::osi3::LogicalLaneBoundary_LogicalBoundaryPoint* Arena::CreateMaybeM
 template<> ::osi3::LogicalLane_LaneConnection* Arena::CreateMaybeMessage<::osi3::LogicalLane_LaneConnection>(Arena*);
 template<> ::osi3::LogicalLane_LaneRelation* Arena::CreateMaybeMessage<::osi3::LogicalLane_LaneRelation>(Arena*);
 template<> ::osi3::LogicalLane_PhysicalLaneReference* Arena::CreateMaybeMessage<::osi3::LogicalLane_PhysicalLaneReference>(Arena*);
+template<> ::osi3::LogicalLane_TrafficRule* Arena::CreateMaybeMessage<::osi3::LogicalLane_TrafficRule>(Arena*);
+template<> ::osi3::LogicalLane_TrafficRule_SpeedLimit* Arena::CreateMaybeMessage<::osi3::LogicalLane_TrafficRule_SpeedLimit>(Arena*);
+template<> ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* Arena::CreateMaybeMessage<::osi3::LogicalLane_TrafficRule_TrafficRuleValidity>(Arena*);
+template<> ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* Arena::CreateMaybeMessage<::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace osi3 {
 
@@ -102,6 +120,28 @@ inline bool LogicalLaneBoundary_PassingRule_Parse(
     ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, LogicalLaneBoundary_PassingRule* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<LogicalLaneBoundary_PassingRule>(
     LogicalLaneBoundary_PassingRule_descriptor(), name, value);
+}
+enum LogicalLane_TrafficRule_TrafficRuleType : int {
+  LogicalLane_TrafficRule_TrafficRuleType_TRAFFIC_RULE_TYPE_SPEED_LIMIT = 0
+};
+bool LogicalLane_TrafficRule_TrafficRuleType_IsValid(int value);
+constexpr LogicalLane_TrafficRule_TrafficRuleType LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_MIN = LogicalLane_TrafficRule_TrafficRuleType_TRAFFIC_RULE_TYPE_SPEED_LIMIT;
+constexpr LogicalLane_TrafficRule_TrafficRuleType LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_MAX = LogicalLane_TrafficRule_TrafficRuleType_TRAFFIC_RULE_TYPE_SPEED_LIMIT;
+constexpr int LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_ARRAYSIZE = LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* LogicalLane_TrafficRule_TrafficRuleType_descriptor();
+template<typename T>
+inline const std::string& LogicalLane_TrafficRule_TrafficRuleType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, LogicalLane_TrafficRule_TrafficRuleType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function LogicalLane_TrafficRule_TrafficRuleType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    LogicalLane_TrafficRule_TrafficRuleType_descriptor(), enum_t_value);
+}
+inline bool LogicalLane_TrafficRule_TrafficRuleType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, LogicalLane_TrafficRule_TrafficRuleType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<LogicalLane_TrafficRule_TrafficRuleType>(
+    LogicalLane_TrafficRule_TrafficRuleType_descriptor(), name, value);
 }
 enum LogicalLane_Type : int {
   LogicalLane_Type_TYPE_UNKNOWN = 0,
@@ -168,6 +208,41 @@ inline bool LogicalLane_MoveDirection_Parse(
     ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, LogicalLane_MoveDirection* value) {
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<LogicalLane_MoveDirection>(
     LogicalLane_MoveDirection_descriptor(), name, value);
+}
+enum LogicalLane_RoadType : int {
+  LogicalLane_RoadType_ROAD_TYPE_UNKNOWN = 0,
+  LogicalLane_RoadType_ROAD_TYPE_OTHER = 1,
+  LogicalLane_RoadType_ROAD_TYPE_LOWSPEED = 2,
+  LogicalLane_RoadType_ROAD_TYPE_MOTORWAY = 3,
+  LogicalLane_RoadType_ROAD_TYPE_PEDESTRIAN = 4,
+  LogicalLane_RoadType_ROAD_TYPE_RURAL = 5,
+  LogicalLane_RoadType_ROAD_TYPE_TOWNARTERIAL = 6,
+  LogicalLane_RoadType_ROAD_TYPE_TOWNCOLLECTOR = 7,
+  LogicalLane_RoadType_ROAD_TYPE_TOWNEXPRESSWAY = 8,
+  LogicalLane_RoadType_ROAD_TYPE_TOWNLOCAL = 9,
+  LogicalLane_RoadType_ROAD_TYPE_TOWNPLAYSTREET = 10,
+  LogicalLane_RoadType_ROAD_TYPE_TOWNPRIVATE = 11,
+  LogicalLane_RoadType_ROAD_TYPE_TOWN = 12,
+  LogicalLane_RoadType_ROAD_TYPE_BICYCLE = 13
+};
+bool LogicalLane_RoadType_IsValid(int value);
+constexpr LogicalLane_RoadType LogicalLane_RoadType_RoadType_MIN = LogicalLane_RoadType_ROAD_TYPE_UNKNOWN;
+constexpr LogicalLane_RoadType LogicalLane_RoadType_RoadType_MAX = LogicalLane_RoadType_ROAD_TYPE_BICYCLE;
+constexpr int LogicalLane_RoadType_RoadType_ARRAYSIZE = LogicalLane_RoadType_RoadType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* LogicalLane_RoadType_descriptor();
+template<typename T>
+inline const std::string& LogicalLane_RoadType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, LogicalLane_RoadType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function LogicalLane_RoadType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    LogicalLane_RoadType_descriptor(), enum_t_value);
+}
+inline bool LogicalLane_RoadType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, LogicalLane_RoadType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<LogicalLane_RoadType>(
+    LogicalLane_RoadType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -1266,6 +1341,789 @@ class LogicalLane_LaneRelation final :
 };
 // -------------------------------------------------------------------
 
+class LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity) */ {
+ public:
+  inline LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity() : LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity(nullptr) {}
+  ~LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity() override;
+  explicit PROTOBUF_CONSTEXPR LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity(const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& from);
+  LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity(LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity&& from) noexcept
+    : LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity() {
+    *this = ::std::move(from);
+  }
+
+  inline LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& operator=(const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& operator=(LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* internal_default_instance() {
+    return reinterpret_cast<const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity*>(
+               &_LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& a, LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& from) {
+    LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity";
+  }
+  protected:
+  explicit LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTypeFieldNumber = 1,
+    kVehicleTypeFieldNumber = 2,
+    kVehicleRoleFieldNumber = 3,
+  };
+  // optional .osi3.MovingObject.Type type = 1;
+  bool has_type() const;
+  private:
+  bool _internal_has_type() const;
+  public:
+  void clear_type();
+  ::osi3::MovingObject_Type type() const;
+  void set_type(::osi3::MovingObject_Type value);
+  private:
+  ::osi3::MovingObject_Type _internal_type() const;
+  void _internal_set_type(::osi3::MovingObject_Type value);
+  public:
+
+  // optional .osi3.MovingObject.VehicleClassification.Type vehicle_type = 2;
+  bool has_vehicle_type() const;
+  private:
+  bool _internal_has_vehicle_type() const;
+  public:
+  void clear_vehicle_type();
+  ::osi3::MovingObject_VehicleClassification_Type vehicle_type() const;
+  void set_vehicle_type(::osi3::MovingObject_VehicleClassification_Type value);
+  private:
+  ::osi3::MovingObject_VehicleClassification_Type _internal_vehicle_type() const;
+  void _internal_set_vehicle_type(::osi3::MovingObject_VehicleClassification_Type value);
+  public:
+
+  // optional .osi3.MovingObject.VehicleClassification.Role vehicle_role = 3;
+  bool has_vehicle_role() const;
+  private:
+  bool _internal_has_vehicle_role() const;
+  public:
+  void clear_vehicle_role();
+  ::osi3::MovingObject_VehicleClassification_Role vehicle_role() const;
+  void set_vehicle_role(::osi3::MovingObject_VehicleClassification_Role value);
+  private:
+  ::osi3::MovingObject_VehicleClassification_Role _internal_vehicle_role() const;
+  void _internal_set_vehicle_role(::osi3::MovingObject_VehicleClassification_Role value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    int type_;
+    int vehicle_type_;
+    int vehicle_role_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_osi_5flogicallane_2eproto;
+};
+// -------------------------------------------------------------------
+
+class LogicalLane_TrafficRule_TrafficRuleValidity final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:osi3.LogicalLane.TrafficRule.TrafficRuleValidity) */ {
+ public:
+  inline LogicalLane_TrafficRule_TrafficRuleValidity() : LogicalLane_TrafficRule_TrafficRuleValidity(nullptr) {}
+  ~LogicalLane_TrafficRule_TrafficRuleValidity() override;
+  explicit PROTOBUF_CONSTEXPR LogicalLane_TrafficRule_TrafficRuleValidity(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LogicalLane_TrafficRule_TrafficRuleValidity(const LogicalLane_TrafficRule_TrafficRuleValidity& from);
+  LogicalLane_TrafficRule_TrafficRuleValidity(LogicalLane_TrafficRule_TrafficRuleValidity&& from) noexcept
+    : LogicalLane_TrafficRule_TrafficRuleValidity() {
+    *this = ::std::move(from);
+  }
+
+  inline LogicalLane_TrafficRule_TrafficRuleValidity& operator=(const LogicalLane_TrafficRule_TrafficRuleValidity& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LogicalLane_TrafficRule_TrafficRuleValidity& operator=(LogicalLane_TrafficRule_TrafficRuleValidity&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LogicalLane_TrafficRule_TrafficRuleValidity& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LogicalLane_TrafficRule_TrafficRuleValidity* internal_default_instance() {
+    return reinterpret_cast<const LogicalLane_TrafficRule_TrafficRuleValidity*>(
+               &_LogicalLane_TrafficRule_TrafficRuleValidity_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(LogicalLane_TrafficRule_TrafficRuleValidity& a, LogicalLane_TrafficRule_TrafficRuleValidity& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LogicalLane_TrafficRule_TrafficRuleValidity* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LogicalLane_TrafficRule_TrafficRuleValidity* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LogicalLane_TrafficRule_TrafficRuleValidity* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LogicalLane_TrafficRule_TrafficRuleValidity>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LogicalLane_TrafficRule_TrafficRuleValidity& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LogicalLane_TrafficRule_TrafficRuleValidity& from) {
+    LogicalLane_TrafficRule_TrafficRuleValidity::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LogicalLane_TrafficRule_TrafficRuleValidity* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "osi3.LogicalLane.TrafficRule.TrafficRuleValidity";
+  }
+  protected:
+  explicit LogicalLane_TrafficRule_TrafficRuleValidity(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  typedef LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity TypeValidity;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kValidForTypeFieldNumber = 3,
+    kStartSFieldNumber = 1,
+    kEndSFieldNumber = 2,
+  };
+  // repeated .osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity valid_for_type = 3;
+  int valid_for_type_size() const;
+  private:
+  int _internal_valid_for_type_size() const;
+  public:
+  void clear_valid_for_type();
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* mutable_valid_for_type(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity >*
+      mutable_valid_for_type();
+  private:
+  const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& _internal_valid_for_type(int index) const;
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* _internal_add_valid_for_type();
+  public:
+  const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& valid_for_type(int index) const;
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* add_valid_for_type();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity >&
+      valid_for_type() const;
+
+  // optional double start_s = 1;
+  bool has_start_s() const;
+  private:
+  bool _internal_has_start_s() const;
+  public:
+  void clear_start_s();
+  double start_s() const;
+  void set_start_s(double value);
+  private:
+  double _internal_start_s() const;
+  void _internal_set_start_s(double value);
+  public:
+
+  // optional double end_s = 2;
+  bool has_end_s() const;
+  private:
+  bool _internal_has_end_s() const;
+  public:
+  void clear_end_s();
+  double end_s() const;
+  void set_end_s(double value);
+  private:
+  double _internal_end_s() const;
+  void _internal_set_end_s(double value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:osi3.LogicalLane.TrafficRule.TrafficRuleValidity)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity > valid_for_type_;
+    double start_s_;
+    double end_s_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_osi_5flogicallane_2eproto;
+};
+// -------------------------------------------------------------------
+
+class LogicalLane_TrafficRule_SpeedLimit final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:osi3.LogicalLane.TrafficRule.SpeedLimit) */ {
+ public:
+  inline LogicalLane_TrafficRule_SpeedLimit() : LogicalLane_TrafficRule_SpeedLimit(nullptr) {}
+  ~LogicalLane_TrafficRule_SpeedLimit() override;
+  explicit PROTOBUF_CONSTEXPR LogicalLane_TrafficRule_SpeedLimit(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LogicalLane_TrafficRule_SpeedLimit(const LogicalLane_TrafficRule_SpeedLimit& from);
+  LogicalLane_TrafficRule_SpeedLimit(LogicalLane_TrafficRule_SpeedLimit&& from) noexcept
+    : LogicalLane_TrafficRule_SpeedLimit() {
+    *this = ::std::move(from);
+  }
+
+  inline LogicalLane_TrafficRule_SpeedLimit& operator=(const LogicalLane_TrafficRule_SpeedLimit& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LogicalLane_TrafficRule_SpeedLimit& operator=(LogicalLane_TrafficRule_SpeedLimit&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LogicalLane_TrafficRule_SpeedLimit& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LogicalLane_TrafficRule_SpeedLimit* internal_default_instance() {
+    return reinterpret_cast<const LogicalLane_TrafficRule_SpeedLimit*>(
+               &_LogicalLane_TrafficRule_SpeedLimit_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(LogicalLane_TrafficRule_SpeedLimit& a, LogicalLane_TrafficRule_SpeedLimit& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LogicalLane_TrafficRule_SpeedLimit* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LogicalLane_TrafficRule_SpeedLimit* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LogicalLane_TrafficRule_SpeedLimit* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LogicalLane_TrafficRule_SpeedLimit>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LogicalLane_TrafficRule_SpeedLimit& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LogicalLane_TrafficRule_SpeedLimit& from) {
+    LogicalLane_TrafficRule_SpeedLimit::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LogicalLane_TrafficRule_SpeedLimit* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "osi3.LogicalLane.TrafficRule.SpeedLimit";
+  }
+  protected:
+  explicit LogicalLane_TrafficRule_SpeedLimit(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSpeedLimitValueFieldNumber = 1,
+  };
+  // optional .osi3.TrafficSignValue speed_limit_value = 1;
+  bool has_speed_limit_value() const;
+  private:
+  bool _internal_has_speed_limit_value() const;
+  public:
+  void clear_speed_limit_value();
+  const ::osi3::TrafficSignValue& speed_limit_value() const;
+  PROTOBUF_NODISCARD ::osi3::TrafficSignValue* release_speed_limit_value();
+  ::osi3::TrafficSignValue* mutable_speed_limit_value();
+  void set_allocated_speed_limit_value(::osi3::TrafficSignValue* speed_limit_value);
+  private:
+  const ::osi3::TrafficSignValue& _internal_speed_limit_value() const;
+  ::osi3::TrafficSignValue* _internal_mutable_speed_limit_value();
+  public:
+  void unsafe_arena_set_allocated_speed_limit_value(
+      ::osi3::TrafficSignValue* speed_limit_value);
+  ::osi3::TrafficSignValue* unsafe_arena_release_speed_limit_value();
+
+  // @@protoc_insertion_point(class_scope:osi3.LogicalLane.TrafficRule.SpeedLimit)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::osi3::TrafficSignValue* speed_limit_value_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_osi_5flogicallane_2eproto;
+};
+// -------------------------------------------------------------------
+
+class LogicalLane_TrafficRule final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:osi3.LogicalLane.TrafficRule) */ {
+ public:
+  inline LogicalLane_TrafficRule() : LogicalLane_TrafficRule(nullptr) {}
+  ~LogicalLane_TrafficRule() override;
+  explicit PROTOBUF_CONSTEXPR LogicalLane_TrafficRule(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  LogicalLane_TrafficRule(const LogicalLane_TrafficRule& from);
+  LogicalLane_TrafficRule(LogicalLane_TrafficRule&& from) noexcept
+    : LogicalLane_TrafficRule() {
+    *this = ::std::move(from);
+  }
+
+  inline LogicalLane_TrafficRule& operator=(const LogicalLane_TrafficRule& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LogicalLane_TrafficRule& operator=(LogicalLane_TrafficRule&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const LogicalLane_TrafficRule& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const LogicalLane_TrafficRule* internal_default_instance() {
+    return reinterpret_cast<const LogicalLane_TrafficRule*>(
+               &_LogicalLane_TrafficRule_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(LogicalLane_TrafficRule& a, LogicalLane_TrafficRule& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LogicalLane_TrafficRule* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LogicalLane_TrafficRule* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  LogicalLane_TrafficRule* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<LogicalLane_TrafficRule>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const LogicalLane_TrafficRule& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const LogicalLane_TrafficRule& from) {
+    LogicalLane_TrafficRule::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LogicalLane_TrafficRule* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "osi3.LogicalLane.TrafficRule";
+  }
+  protected:
+  explicit LogicalLane_TrafficRule(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  typedef LogicalLane_TrafficRule_TrafficRuleValidity TrafficRuleValidity;
+  typedef LogicalLane_TrafficRule_SpeedLimit SpeedLimit;
+
+  typedef LogicalLane_TrafficRule_TrafficRuleType TrafficRuleType;
+  static constexpr TrafficRuleType TRAFFIC_RULE_TYPE_SPEED_LIMIT =
+    LogicalLane_TrafficRule_TrafficRuleType_TRAFFIC_RULE_TYPE_SPEED_LIMIT;
+  static inline bool TrafficRuleType_IsValid(int value) {
+    return LogicalLane_TrafficRule_TrafficRuleType_IsValid(value);
+  }
+  static constexpr TrafficRuleType TrafficRuleType_MIN =
+    LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_MIN;
+  static constexpr TrafficRuleType TrafficRuleType_MAX =
+    LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_MAX;
+  static constexpr int TrafficRuleType_ARRAYSIZE =
+    LogicalLane_TrafficRule_TrafficRuleType_TrafficRuleType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  TrafficRuleType_descriptor() {
+    return LogicalLane_TrafficRule_TrafficRuleType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& TrafficRuleType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, TrafficRuleType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function TrafficRuleType_Name.");
+    return LogicalLane_TrafficRule_TrafficRuleType_Name(enum_t_value);
+  }
+  static inline bool TrafficRuleType_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
+      TrafficRuleType* value) {
+    return LogicalLane_TrafficRule_TrafficRuleType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTrafficRuleValidityFieldNumber = 2,
+    kSpeedLimitFieldNumber = 3,
+    kTrafficRuleTypeFieldNumber = 1,
+  };
+  // optional .osi3.LogicalLane.TrafficRule.TrafficRuleValidity traffic_rule_validity = 2;
+  bool has_traffic_rule_validity() const;
+  private:
+  bool _internal_has_traffic_rule_validity() const;
+  public:
+  void clear_traffic_rule_validity();
+  const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity& traffic_rule_validity() const;
+  PROTOBUF_NODISCARD ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* release_traffic_rule_validity();
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* mutable_traffic_rule_validity();
+  void set_allocated_traffic_rule_validity(::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* traffic_rule_validity);
+  private:
+  const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity& _internal_traffic_rule_validity() const;
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* _internal_mutable_traffic_rule_validity();
+  public:
+  void unsafe_arena_set_allocated_traffic_rule_validity(
+      ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* traffic_rule_validity);
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* unsafe_arena_release_traffic_rule_validity();
+
+  // optional .osi3.LogicalLane.TrafficRule.SpeedLimit speed_limit = 3;
+  bool has_speed_limit() const;
+  private:
+  bool _internal_has_speed_limit() const;
+  public:
+  void clear_speed_limit();
+  const ::osi3::LogicalLane_TrafficRule_SpeedLimit& speed_limit() const;
+  PROTOBUF_NODISCARD ::osi3::LogicalLane_TrafficRule_SpeedLimit* release_speed_limit();
+  ::osi3::LogicalLane_TrafficRule_SpeedLimit* mutable_speed_limit();
+  void set_allocated_speed_limit(::osi3::LogicalLane_TrafficRule_SpeedLimit* speed_limit);
+  private:
+  const ::osi3::LogicalLane_TrafficRule_SpeedLimit& _internal_speed_limit() const;
+  ::osi3::LogicalLane_TrafficRule_SpeedLimit* _internal_mutable_speed_limit();
+  public:
+  void unsafe_arena_set_allocated_speed_limit(
+      ::osi3::LogicalLane_TrafficRule_SpeedLimit* speed_limit);
+  ::osi3::LogicalLane_TrafficRule_SpeedLimit* unsafe_arena_release_speed_limit();
+
+  // optional .osi3.LogicalLane.TrafficRule.TrafficRuleType traffic_rule_type = 1;
+  bool has_traffic_rule_type() const;
+  private:
+  bool _internal_has_traffic_rule_type() const;
+  public:
+  void clear_traffic_rule_type();
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleType traffic_rule_type() const;
+  void set_traffic_rule_type(::osi3::LogicalLane_TrafficRule_TrafficRuleType value);
+  private:
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleType _internal_traffic_rule_type() const;
+  void _internal_set_traffic_rule_type(::osi3::LogicalLane_TrafficRule_TrafficRuleType value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:osi3.LogicalLane.TrafficRule)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* traffic_rule_validity_;
+    ::osi3::LogicalLane_TrafficRule_SpeedLimit* speed_limit_;
+    int traffic_rule_type_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_osi_5flogicallane_2eproto;
+};
+// -------------------------------------------------------------------
+
 class LogicalLane final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:osi3.LogicalLane) */ {
  public:
@@ -1321,7 +2179,7 @@ class LogicalLane final :
                &_LogicalLane_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    9;
 
   friend void swap(LogicalLane& a, LogicalLane& b) {
     a.Swap(&b);
@@ -1394,6 +2252,7 @@ class LogicalLane final :
   typedef LogicalLane_PhysicalLaneReference PhysicalLaneReference;
   typedef LogicalLane_LaneConnection LaneConnection;
   typedef LogicalLane_LaneRelation LaneRelation;
+  typedef LogicalLane_TrafficRule TrafficRule;
 
   typedef LogicalLane_Type Type;
   static constexpr Type TYPE_UNKNOWN =
@@ -1495,6 +2354,60 @@ class LogicalLane final :
     return LogicalLane_MoveDirection_Parse(name, value);
   }
 
+  typedef LogicalLane_RoadType RoadType;
+  static constexpr RoadType ROAD_TYPE_UNKNOWN =
+    LogicalLane_RoadType_ROAD_TYPE_UNKNOWN;
+  static constexpr RoadType ROAD_TYPE_OTHER =
+    LogicalLane_RoadType_ROAD_TYPE_OTHER;
+  static constexpr RoadType ROAD_TYPE_LOWSPEED =
+    LogicalLane_RoadType_ROAD_TYPE_LOWSPEED;
+  static constexpr RoadType ROAD_TYPE_MOTORWAY =
+    LogicalLane_RoadType_ROAD_TYPE_MOTORWAY;
+  static constexpr RoadType ROAD_TYPE_PEDESTRIAN =
+    LogicalLane_RoadType_ROAD_TYPE_PEDESTRIAN;
+  static constexpr RoadType ROAD_TYPE_RURAL =
+    LogicalLane_RoadType_ROAD_TYPE_RURAL;
+  static constexpr RoadType ROAD_TYPE_TOWNARTERIAL =
+    LogicalLane_RoadType_ROAD_TYPE_TOWNARTERIAL;
+  static constexpr RoadType ROAD_TYPE_TOWNCOLLECTOR =
+    LogicalLane_RoadType_ROAD_TYPE_TOWNCOLLECTOR;
+  static constexpr RoadType ROAD_TYPE_TOWNEXPRESSWAY =
+    LogicalLane_RoadType_ROAD_TYPE_TOWNEXPRESSWAY;
+  static constexpr RoadType ROAD_TYPE_TOWNLOCAL =
+    LogicalLane_RoadType_ROAD_TYPE_TOWNLOCAL;
+  static constexpr RoadType ROAD_TYPE_TOWNPLAYSTREET =
+    LogicalLane_RoadType_ROAD_TYPE_TOWNPLAYSTREET;
+  static constexpr RoadType ROAD_TYPE_TOWNPRIVATE =
+    LogicalLane_RoadType_ROAD_TYPE_TOWNPRIVATE;
+  static constexpr RoadType ROAD_TYPE_TOWN =
+    LogicalLane_RoadType_ROAD_TYPE_TOWN;
+  static constexpr RoadType ROAD_TYPE_BICYCLE =
+    LogicalLane_RoadType_ROAD_TYPE_BICYCLE;
+  static inline bool RoadType_IsValid(int value) {
+    return LogicalLane_RoadType_IsValid(value);
+  }
+  static constexpr RoadType RoadType_MIN =
+    LogicalLane_RoadType_RoadType_MIN;
+  static constexpr RoadType RoadType_MAX =
+    LogicalLane_RoadType_RoadType_MAX;
+  static constexpr int RoadType_ARRAYSIZE =
+    LogicalLane_RoadType_RoadType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  RoadType_descriptor() {
+    return LogicalLane_RoadType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& RoadType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, RoadType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function RoadType_Name.");
+    return LogicalLane_RoadType_Name(enum_t_value);
+  }
+  static inline bool RoadType_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,
+      RoadType* value) {
+    return LogicalLane_RoadType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   enum : int {
@@ -1507,6 +2420,7 @@ class LogicalLane final :
     kLeftBoundaryIdFieldNumber = 13,
     kPredecessorLaneFieldNumber = 14,
     kSuccessorLaneFieldNumber = 15,
+    kTrafficRuleFieldNumber = 17,
     kStreetNameFieldNumber = 16,
     kIdFieldNumber = 1,
     kReferenceLineIdFieldNumber = 5,
@@ -1514,6 +2428,7 @@ class LogicalLane final :
     kMoveDirectionFieldNumber = 8,
     kStartSFieldNumber = 6,
     kEndSFieldNumber = 7,
+    kRoadTypeFieldNumber = 18,
   };
   // repeated .osi3.ExternalReference source_reference = 3;
   int source_reference_size() const;
@@ -1677,6 +2592,24 @@ class LogicalLane final :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_LaneConnection >&
       successor_lane() const;
 
+  // repeated .osi3.LogicalLane.TrafficRule traffic_rule = 17;
+  int traffic_rule_size() const;
+  private:
+  int _internal_traffic_rule_size() const;
+  public:
+  void clear_traffic_rule();
+  ::osi3::LogicalLane_TrafficRule* mutable_traffic_rule(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule >*
+      mutable_traffic_rule();
+  private:
+  const ::osi3::LogicalLane_TrafficRule& _internal_traffic_rule(int index) const;
+  ::osi3::LogicalLane_TrafficRule* _internal_add_traffic_rule();
+  public:
+  const ::osi3::LogicalLane_TrafficRule& traffic_rule(int index) const;
+  ::osi3::LogicalLane_TrafficRule* add_traffic_rule();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule >&
+      traffic_rule() const;
+
   // optional string street_name = 16;
   bool has_street_name() const;
   private:
@@ -1783,6 +2716,19 @@ class LogicalLane final :
   void _internal_set_end_s(double value);
   public:
 
+  // optional .osi3.LogicalLane.RoadType road_type = 18;
+  bool has_road_type() const;
+  private:
+  bool _internal_has_road_type() const;
+  public:
+  void clear_road_type();
+  ::osi3::LogicalLane_RoadType road_type() const;
+  void set_road_type(::osi3::LogicalLane_RoadType value);
+  private:
+  ::osi3::LogicalLane_RoadType _internal_road_type() const;
+  void _internal_set_road_type(::osi3::LogicalLane_RoadType value);
+  public:
+
   // @@protoc_insertion_point(class_scope:osi3.LogicalLane)
  private:
   class _Internal;
@@ -1802,6 +2748,7 @@ class LogicalLane final :
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::Identifier > left_boundary_id_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_LaneConnection > predecessor_lane_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_LaneConnection > successor_lane_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule > traffic_rule_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr street_name_;
     ::osi3::Identifier* id_;
     ::osi3::Identifier* reference_line_id_;
@@ -1809,6 +2756,7 @@ class LogicalLane final :
     int move_direction_;
     double start_s_;
     double end_s_;
+    int road_type_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_osi_5flogicallane_2eproto;
@@ -2759,6 +3707,501 @@ inline void LogicalLane_LaneRelation::set_end_s_other(double value) {
 
 // -------------------------------------------------------------------
 
+// LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity
+
+// optional .osi3.MovingObject.Type type = 1;
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_has_type() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::has_type() const {
+  return _internal_has_type();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::clear_type() {
+  _impl_.type_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::osi3::MovingObject_Type LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_type() const {
+  return static_cast< ::osi3::MovingObject_Type >(_impl_.type_);
+}
+inline ::osi3::MovingObject_Type LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::type() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity.type)
+  return _internal_type();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_set_type(::osi3::MovingObject_Type value) {
+  assert(::osi3::MovingObject_Type_IsValid(value));
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.type_ = value;
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::set_type(::osi3::MovingObject_Type value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity.type)
+}
+
+// optional .osi3.MovingObject.VehicleClassification.Type vehicle_type = 2;
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_has_vehicle_type() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::has_vehicle_type() const {
+  return _internal_has_vehicle_type();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::clear_vehicle_type() {
+  _impl_.vehicle_type_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::osi3::MovingObject_VehicleClassification_Type LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_vehicle_type() const {
+  return static_cast< ::osi3::MovingObject_VehicleClassification_Type >(_impl_.vehicle_type_);
+}
+inline ::osi3::MovingObject_VehicleClassification_Type LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::vehicle_type() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity.vehicle_type)
+  return _internal_vehicle_type();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_set_vehicle_type(::osi3::MovingObject_VehicleClassification_Type value) {
+  assert(::osi3::MovingObject_VehicleClassification_Type_IsValid(value));
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.vehicle_type_ = value;
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::set_vehicle_type(::osi3::MovingObject_VehicleClassification_Type value) {
+  _internal_set_vehicle_type(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity.vehicle_type)
+}
+
+// optional .osi3.MovingObject.VehicleClassification.Role vehicle_role = 3;
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_has_vehicle_role() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::has_vehicle_role() const {
+  return _internal_has_vehicle_role();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::clear_vehicle_role() {
+  _impl_.vehicle_role_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline ::osi3::MovingObject_VehicleClassification_Role LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_vehicle_role() const {
+  return static_cast< ::osi3::MovingObject_VehicleClassification_Role >(_impl_.vehicle_role_);
+}
+inline ::osi3::MovingObject_VehicleClassification_Role LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::vehicle_role() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity.vehicle_role)
+  return _internal_vehicle_role();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::_internal_set_vehicle_role(::osi3::MovingObject_VehicleClassification_Role value) {
+  assert(::osi3::MovingObject_VehicleClassification_Role_IsValid(value));
+  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_.vehicle_role_ = value;
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity::set_vehicle_role(::osi3::MovingObject_VehicleClassification_Role value) {
+  _internal_set_vehicle_role(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity.vehicle_role)
+}
+
+// -------------------------------------------------------------------
+
+// LogicalLane_TrafficRule_TrafficRuleValidity
+
+// optional double start_s = 1;
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity::_internal_has_start_s() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity::has_start_s() const {
+  return _internal_has_start_s();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::clear_start_s() {
+  _impl_.start_s_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline double LogicalLane_TrafficRule_TrafficRuleValidity::_internal_start_s() const {
+  return _impl_.start_s_;
+}
+inline double LogicalLane_TrafficRule_TrafficRuleValidity::start_s() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.start_s)
+  return _internal_start_s();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::_internal_set_start_s(double value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.start_s_ = value;
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::set_start_s(double value) {
+  _internal_set_start_s(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.start_s)
+}
+
+// optional double end_s = 2;
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity::_internal_has_end_s() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool LogicalLane_TrafficRule_TrafficRuleValidity::has_end_s() const {
+  return _internal_has_end_s();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::clear_end_s() {
+  _impl_.end_s_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline double LogicalLane_TrafficRule_TrafficRuleValidity::_internal_end_s() const {
+  return _impl_.end_s_;
+}
+inline double LogicalLane_TrafficRule_TrafficRuleValidity::end_s() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.end_s)
+  return _internal_end_s();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::_internal_set_end_s(double value) {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.end_s_ = value;
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::set_end_s(double value) {
+  _internal_set_end_s(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.end_s)
+}
+
+// repeated .osi3.LogicalLane.TrafficRule.TrafficRuleValidity.TypeValidity valid_for_type = 3;
+inline int LogicalLane_TrafficRule_TrafficRuleValidity::_internal_valid_for_type_size() const {
+  return _impl_.valid_for_type_.size();
+}
+inline int LogicalLane_TrafficRule_TrafficRuleValidity::valid_for_type_size() const {
+  return _internal_valid_for_type_size();
+}
+inline void LogicalLane_TrafficRule_TrafficRuleValidity::clear_valid_for_type() {
+  _impl_.valid_for_type_.Clear();
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* LogicalLane_TrafficRule_TrafficRuleValidity::mutable_valid_for_type(int index) {
+  // @@protoc_insertion_point(field_mutable:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.valid_for_type)
+  return _impl_.valid_for_type_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity >*
+LogicalLane_TrafficRule_TrafficRuleValidity::mutable_valid_for_type() {
+  // @@protoc_insertion_point(field_mutable_list:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.valid_for_type)
+  return &_impl_.valid_for_type_;
+}
+inline const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& LogicalLane_TrafficRule_TrafficRuleValidity::_internal_valid_for_type(int index) const {
+  return _impl_.valid_for_type_.Get(index);
+}
+inline const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity& LogicalLane_TrafficRule_TrafficRuleValidity::valid_for_type(int index) const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.valid_for_type)
+  return _internal_valid_for_type(index);
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* LogicalLane_TrafficRule_TrafficRuleValidity::_internal_add_valid_for_type() {
+  return _impl_.valid_for_type_.Add();
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* LogicalLane_TrafficRule_TrafficRuleValidity::add_valid_for_type() {
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity* _add = _internal_add_valid_for_type();
+  // @@protoc_insertion_point(field_add:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.valid_for_type)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity_TypeValidity >&
+LogicalLane_TrafficRule_TrafficRuleValidity::valid_for_type() const {
+  // @@protoc_insertion_point(field_list:osi3.LogicalLane.TrafficRule.TrafficRuleValidity.valid_for_type)
+  return _impl_.valid_for_type_;
+}
+
+// -------------------------------------------------------------------
+
+// LogicalLane_TrafficRule_SpeedLimit
+
+// optional .osi3.TrafficSignValue speed_limit_value = 1;
+inline bool LogicalLane_TrafficRule_SpeedLimit::_internal_has_speed_limit_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.speed_limit_value_ != nullptr);
+  return value;
+}
+inline bool LogicalLane_TrafficRule_SpeedLimit::has_speed_limit_value() const {
+  return _internal_has_speed_limit_value();
+}
+inline const ::osi3::TrafficSignValue& LogicalLane_TrafficRule_SpeedLimit::_internal_speed_limit_value() const {
+  const ::osi3::TrafficSignValue* p = _impl_.speed_limit_value_;
+  return p != nullptr ? *p : reinterpret_cast<const ::osi3::TrafficSignValue&>(
+      ::osi3::_TrafficSignValue_default_instance_);
+}
+inline const ::osi3::TrafficSignValue& LogicalLane_TrafficRule_SpeedLimit::speed_limit_value() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.SpeedLimit.speed_limit_value)
+  return _internal_speed_limit_value();
+}
+inline void LogicalLane_TrafficRule_SpeedLimit::unsafe_arena_set_allocated_speed_limit_value(
+    ::osi3::TrafficSignValue* speed_limit_value) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.speed_limit_value_);
+  }
+  _impl_.speed_limit_value_ = speed_limit_value;
+  if (speed_limit_value) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.LogicalLane.TrafficRule.SpeedLimit.speed_limit_value)
+}
+inline ::osi3::TrafficSignValue* LogicalLane_TrafficRule_SpeedLimit::release_speed_limit_value() {
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::osi3::TrafficSignValue* temp = _impl_.speed_limit_value_;
+  _impl_.speed_limit_value_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::osi3::TrafficSignValue* LogicalLane_TrafficRule_SpeedLimit::unsafe_arena_release_speed_limit_value() {
+  // @@protoc_insertion_point(field_release:osi3.LogicalLane.TrafficRule.SpeedLimit.speed_limit_value)
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::osi3::TrafficSignValue* temp = _impl_.speed_limit_value_;
+  _impl_.speed_limit_value_ = nullptr;
+  return temp;
+}
+inline ::osi3::TrafficSignValue* LogicalLane_TrafficRule_SpeedLimit::_internal_mutable_speed_limit_value() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  if (_impl_.speed_limit_value_ == nullptr) {
+    auto* p = CreateMaybeMessage<::osi3::TrafficSignValue>(GetArenaForAllocation());
+    _impl_.speed_limit_value_ = p;
+  }
+  return _impl_.speed_limit_value_;
+}
+inline ::osi3::TrafficSignValue* LogicalLane_TrafficRule_SpeedLimit::mutable_speed_limit_value() {
+  ::osi3::TrafficSignValue* _msg = _internal_mutable_speed_limit_value();
+  // @@protoc_insertion_point(field_mutable:osi3.LogicalLane.TrafficRule.SpeedLimit.speed_limit_value)
+  return _msg;
+}
+inline void LogicalLane_TrafficRule_SpeedLimit::set_allocated_speed_limit_value(::osi3::TrafficSignValue* speed_limit_value) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.speed_limit_value_);
+  }
+  if (speed_limit_value) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(speed_limit_value));
+    if (message_arena != submessage_arena) {
+      speed_limit_value = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, speed_limit_value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.speed_limit_value_ = speed_limit_value;
+  // @@protoc_insertion_point(field_set_allocated:osi3.LogicalLane.TrafficRule.SpeedLimit.speed_limit_value)
+}
+
+// -------------------------------------------------------------------
+
+// LogicalLane_TrafficRule
+
+// optional .osi3.LogicalLane.TrafficRule.TrafficRuleType traffic_rule_type = 1;
+inline bool LogicalLane_TrafficRule::_internal_has_traffic_rule_type() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool LogicalLane_TrafficRule::has_traffic_rule_type() const {
+  return _internal_has_traffic_rule_type();
+}
+inline void LogicalLane_TrafficRule::clear_traffic_rule_type() {
+  _impl_.traffic_rule_type_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleType LogicalLane_TrafficRule::_internal_traffic_rule_type() const {
+  return static_cast< ::osi3::LogicalLane_TrafficRule_TrafficRuleType >(_impl_.traffic_rule_type_);
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleType LogicalLane_TrafficRule::traffic_rule_type() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.traffic_rule_type)
+  return _internal_traffic_rule_type();
+}
+inline void LogicalLane_TrafficRule::_internal_set_traffic_rule_type(::osi3::LogicalLane_TrafficRule_TrafficRuleType value) {
+  assert(::osi3::LogicalLane_TrafficRule_TrafficRuleType_IsValid(value));
+  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_.traffic_rule_type_ = value;
+}
+inline void LogicalLane_TrafficRule::set_traffic_rule_type(::osi3::LogicalLane_TrafficRule_TrafficRuleType value) {
+  _internal_set_traffic_rule_type(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.TrafficRule.traffic_rule_type)
+}
+
+// optional .osi3.LogicalLane.TrafficRule.TrafficRuleValidity traffic_rule_validity = 2;
+inline bool LogicalLane_TrafficRule::_internal_has_traffic_rule_validity() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.traffic_rule_validity_ != nullptr);
+  return value;
+}
+inline bool LogicalLane_TrafficRule::has_traffic_rule_validity() const {
+  return _internal_has_traffic_rule_validity();
+}
+inline void LogicalLane_TrafficRule::clear_traffic_rule_validity() {
+  if (_impl_.traffic_rule_validity_ != nullptr) _impl_.traffic_rule_validity_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity& LogicalLane_TrafficRule::_internal_traffic_rule_validity() const {
+  const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* p = _impl_.traffic_rule_validity_;
+  return p != nullptr ? *p : reinterpret_cast<const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity&>(
+      ::osi3::_LogicalLane_TrafficRule_TrafficRuleValidity_default_instance_);
+}
+inline const ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity& LogicalLane_TrafficRule::traffic_rule_validity() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.traffic_rule_validity)
+  return _internal_traffic_rule_validity();
+}
+inline void LogicalLane_TrafficRule::unsafe_arena_set_allocated_traffic_rule_validity(
+    ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* traffic_rule_validity) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.traffic_rule_validity_);
+  }
+  _impl_.traffic_rule_validity_ = traffic_rule_validity;
+  if (traffic_rule_validity) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.LogicalLane.TrafficRule.traffic_rule_validity)
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* LogicalLane_TrafficRule::release_traffic_rule_validity() {
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* temp = _impl_.traffic_rule_validity_;
+  _impl_.traffic_rule_validity_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* LogicalLane_TrafficRule::unsafe_arena_release_traffic_rule_validity() {
+  // @@protoc_insertion_point(field_release:osi3.LogicalLane.TrafficRule.traffic_rule_validity)
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* temp = _impl_.traffic_rule_validity_;
+  _impl_.traffic_rule_validity_ = nullptr;
+  return temp;
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* LogicalLane_TrafficRule::_internal_mutable_traffic_rule_validity() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  if (_impl_.traffic_rule_validity_ == nullptr) {
+    auto* p = CreateMaybeMessage<::osi3::LogicalLane_TrafficRule_TrafficRuleValidity>(GetArenaForAllocation());
+    _impl_.traffic_rule_validity_ = p;
+  }
+  return _impl_.traffic_rule_validity_;
+}
+inline ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* LogicalLane_TrafficRule::mutable_traffic_rule_validity() {
+  ::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* _msg = _internal_mutable_traffic_rule_validity();
+  // @@protoc_insertion_point(field_mutable:osi3.LogicalLane.TrafficRule.traffic_rule_validity)
+  return _msg;
+}
+inline void LogicalLane_TrafficRule::set_allocated_traffic_rule_validity(::osi3::LogicalLane_TrafficRule_TrafficRuleValidity* traffic_rule_validity) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.traffic_rule_validity_;
+  }
+  if (traffic_rule_validity) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(traffic_rule_validity);
+    if (message_arena != submessage_arena) {
+      traffic_rule_validity = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, traffic_rule_validity, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.traffic_rule_validity_ = traffic_rule_validity;
+  // @@protoc_insertion_point(field_set_allocated:osi3.LogicalLane.TrafficRule.traffic_rule_validity)
+}
+
+// optional .osi3.LogicalLane.TrafficRule.SpeedLimit speed_limit = 3;
+inline bool LogicalLane_TrafficRule::_internal_has_speed_limit() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.speed_limit_ != nullptr);
+  return value;
+}
+inline bool LogicalLane_TrafficRule::has_speed_limit() const {
+  return _internal_has_speed_limit();
+}
+inline void LogicalLane_TrafficRule::clear_speed_limit() {
+  if (_impl_.speed_limit_ != nullptr) _impl_.speed_limit_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline const ::osi3::LogicalLane_TrafficRule_SpeedLimit& LogicalLane_TrafficRule::_internal_speed_limit() const {
+  const ::osi3::LogicalLane_TrafficRule_SpeedLimit* p = _impl_.speed_limit_;
+  return p != nullptr ? *p : reinterpret_cast<const ::osi3::LogicalLane_TrafficRule_SpeedLimit&>(
+      ::osi3::_LogicalLane_TrafficRule_SpeedLimit_default_instance_);
+}
+inline const ::osi3::LogicalLane_TrafficRule_SpeedLimit& LogicalLane_TrafficRule::speed_limit() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.TrafficRule.speed_limit)
+  return _internal_speed_limit();
+}
+inline void LogicalLane_TrafficRule::unsafe_arena_set_allocated_speed_limit(
+    ::osi3::LogicalLane_TrafficRule_SpeedLimit* speed_limit) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.speed_limit_);
+  }
+  _impl_.speed_limit_ = speed_limit;
+  if (speed_limit) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:osi3.LogicalLane.TrafficRule.speed_limit)
+}
+inline ::osi3::LogicalLane_TrafficRule_SpeedLimit* LogicalLane_TrafficRule::release_speed_limit() {
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::osi3::LogicalLane_TrafficRule_SpeedLimit* temp = _impl_.speed_limit_;
+  _impl_.speed_limit_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::osi3::LogicalLane_TrafficRule_SpeedLimit* LogicalLane_TrafficRule::unsafe_arena_release_speed_limit() {
+  // @@protoc_insertion_point(field_release:osi3.LogicalLane.TrafficRule.speed_limit)
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::osi3::LogicalLane_TrafficRule_SpeedLimit* temp = _impl_.speed_limit_;
+  _impl_.speed_limit_ = nullptr;
+  return temp;
+}
+inline ::osi3::LogicalLane_TrafficRule_SpeedLimit* LogicalLane_TrafficRule::_internal_mutable_speed_limit() {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  if (_impl_.speed_limit_ == nullptr) {
+    auto* p = CreateMaybeMessage<::osi3::LogicalLane_TrafficRule_SpeedLimit>(GetArenaForAllocation());
+    _impl_.speed_limit_ = p;
+  }
+  return _impl_.speed_limit_;
+}
+inline ::osi3::LogicalLane_TrafficRule_SpeedLimit* LogicalLane_TrafficRule::mutable_speed_limit() {
+  ::osi3::LogicalLane_TrafficRule_SpeedLimit* _msg = _internal_mutable_speed_limit();
+  // @@protoc_insertion_point(field_mutable:osi3.LogicalLane.TrafficRule.speed_limit)
+  return _msg;
+}
+inline void LogicalLane_TrafficRule::set_allocated_speed_limit(::osi3::LogicalLane_TrafficRule_SpeedLimit* speed_limit) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.speed_limit_;
+  }
+  if (speed_limit) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(speed_limit);
+    if (message_arena != submessage_arena) {
+      speed_limit = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, speed_limit, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  _impl_.speed_limit_ = speed_limit;
+  // @@protoc_insertion_point(field_set_allocated:osi3.LogicalLane.TrafficRule.speed_limit)
+}
+
+// -------------------------------------------------------------------
+
 // LogicalLane
 
 // optional .osi3.Identifier id = 1;
@@ -3468,9 +4911,86 @@ inline void LogicalLane::set_allocated_street_name(std::string* street_name) {
   // @@protoc_insertion_point(field_set_allocated:osi3.LogicalLane.street_name)
 }
 
+// repeated .osi3.LogicalLane.TrafficRule traffic_rule = 17;
+inline int LogicalLane::_internal_traffic_rule_size() const {
+  return _impl_.traffic_rule_.size();
+}
+inline int LogicalLane::traffic_rule_size() const {
+  return _internal_traffic_rule_size();
+}
+inline void LogicalLane::clear_traffic_rule() {
+  _impl_.traffic_rule_.Clear();
+}
+inline ::osi3::LogicalLane_TrafficRule* LogicalLane::mutable_traffic_rule(int index) {
+  // @@protoc_insertion_point(field_mutable:osi3.LogicalLane.traffic_rule)
+  return _impl_.traffic_rule_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule >*
+LogicalLane::mutable_traffic_rule() {
+  // @@protoc_insertion_point(field_mutable_list:osi3.LogicalLane.traffic_rule)
+  return &_impl_.traffic_rule_;
+}
+inline const ::osi3::LogicalLane_TrafficRule& LogicalLane::_internal_traffic_rule(int index) const {
+  return _impl_.traffic_rule_.Get(index);
+}
+inline const ::osi3::LogicalLane_TrafficRule& LogicalLane::traffic_rule(int index) const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.traffic_rule)
+  return _internal_traffic_rule(index);
+}
+inline ::osi3::LogicalLane_TrafficRule* LogicalLane::_internal_add_traffic_rule() {
+  return _impl_.traffic_rule_.Add();
+}
+inline ::osi3::LogicalLane_TrafficRule* LogicalLane::add_traffic_rule() {
+  ::osi3::LogicalLane_TrafficRule* _add = _internal_add_traffic_rule();
+  // @@protoc_insertion_point(field_add:osi3.LogicalLane.traffic_rule)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::osi3::LogicalLane_TrafficRule >&
+LogicalLane::traffic_rule() const {
+  // @@protoc_insertion_point(field_list:osi3.LogicalLane.traffic_rule)
+  return _impl_.traffic_rule_;
+}
+
+// optional .osi3.LogicalLane.RoadType road_type = 18;
+inline bool LogicalLane::_internal_has_road_type() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
+  return value;
+}
+inline bool LogicalLane::has_road_type() const {
+  return _internal_has_road_type();
+}
+inline void LogicalLane::clear_road_type() {
+  _impl_.road_type_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000080u;
+}
+inline ::osi3::LogicalLane_RoadType LogicalLane::_internal_road_type() const {
+  return static_cast< ::osi3::LogicalLane_RoadType >(_impl_.road_type_);
+}
+inline ::osi3::LogicalLane_RoadType LogicalLane::road_type() const {
+  // @@protoc_insertion_point(field_get:osi3.LogicalLane.road_type)
+  return _internal_road_type();
+}
+inline void LogicalLane::_internal_set_road_type(::osi3::LogicalLane_RoadType value) {
+  assert(::osi3::LogicalLane_RoadType_IsValid(value));
+  _impl_._has_bits_[0] |= 0x00000080u;
+  _impl_.road_type_ = value;
+}
+inline void LogicalLane::set_road_type(::osi3::LogicalLane_RoadType value) {
+  _internal_set_road_type(value);
+  // @@protoc_insertion_point(field_set:osi3.LogicalLane.road_type)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -3493,6 +5013,11 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::osi3::LogicalLaneBoundary_PassingRule>() {
   return ::osi3::LogicalLaneBoundary_PassingRule_descriptor();
 }
+template <> struct is_proto_enum< ::osi3::LogicalLane_TrafficRule_TrafficRuleType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::osi3::LogicalLane_TrafficRule_TrafficRuleType>() {
+  return ::osi3::LogicalLane_TrafficRule_TrafficRuleType_descriptor();
+}
 template <> struct is_proto_enum< ::osi3::LogicalLane_Type> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::osi3::LogicalLane_Type>() {
@@ -3502,6 +5027,11 @@ template <> struct is_proto_enum< ::osi3::LogicalLane_MoveDirection> : ::std::tr
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::osi3::LogicalLane_MoveDirection>() {
   return ::osi3::LogicalLane_MoveDirection_descriptor();
+}
+template <> struct is_proto_enum< ::osi3::LogicalLane_RoadType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::osi3::LogicalLane_RoadType>() {
+  return ::osi3::LogicalLane_RoadType_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

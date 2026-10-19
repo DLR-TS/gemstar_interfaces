@@ -1,5 +1,12 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
+/*
+ * Copyright (c) 2026 DLR e.V.
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
 using System.IO;
 using UnrealBuildTool;
 
@@ -8,25 +15,27 @@ public class GEMSTAR_Interfaces : ModuleRules
 	public GEMSTAR_Interfaces(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+        bUseUnity = false;
 
-        string ThridPartyLibPath = Path.Combine(PluginDirectory, "ThirdParty");
+        string ThirdPartyLibPath = Path.Combine(PluginDirectory, "ThirdParty");
 
         // #################################################### OSI 3 ##################################################
         // fill in path to osi3 lib
-        string Osi3BasePath = Path.Combine(ThridPartyLibPath, "osi3");
+        string Osi3BasePath = Path.Combine(ThirdPartyLibPath, "osi3");
         string Osi3LibPath = Path.Combine(Osi3BasePath, "lib", "osi3");
         string Osi3IncludePath = Path.Combine(Osi3BasePath, "include", "osi3");
 
 
         // #################################################### Google Protobuf ##################################################
         // Path to protobuf-ThridParty folder
-        string ProtobufBasePath = Path.Combine(ThridPartyLibPath, "protobuf");
+        string ProtobufBasePath = Path.Combine(ThirdPartyLibPath, "protobuf");
         // Path to Lib
         string ProtobufLibPath = Path.Combine(ProtobufBasePath, "lib");
         // Path to protobuf include
         string ProtobufIncludeBasePath = Path.Combine(ProtobufBasePath, "include");
 
         PublicDefinitions.Add("GOOGLE_PROTOBUF_NO_RTTI");
+        PublicDefinitions.Add("GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL_INLINE=0");
 
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
@@ -38,9 +47,16 @@ public class GEMSTAR_Interfaces : ModuleRules
         }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
+            PublicIncludePaths.Add(Osi3IncludePath);
+            PublicIncludePaths.Add(ProtobufIncludeBasePath);
 
-            //PublicAdditionalLibraries.Add(Path.Combine(OsiPath, "lib", "libasam_osilib.a"));
-            //PublicAdditionalLibraries.Add("stdc++");
+            PublicAdditionalLibraries.Add(
+                Path.Combine(Osi3LibPath, "libopen_simulation_interface_pic.a")
+            );
+            PublicAdditionalLibraries.Add(
+                Path.Combine(ProtobufLibPath, "libprotobuf.a")
+            );
+            PublicSystemLibraries.Add("stdc++");
         }
         else if (Target.Platform == UnrealTargetPlatform.Mac)
         {
@@ -55,6 +71,7 @@ public class GEMSTAR_Interfaces : ModuleRules
                 ProtobufIncludeBasePath,
             }
 			);
+
 				
 		
 		PrivateIncludePaths.AddRange(
@@ -68,6 +85,9 @@ public class GEMSTAR_Interfaces : ModuleRules
 			new string[]
 			{
 				"Core",
+				"CoreUObject",
+				"Engine",
+                "XmlParser",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -76,10 +96,12 @@ public class GEMSTAR_Interfaces : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"CoreUObject",
-				"Engine",
 				"Slate",
 				"SlateCore",
+				"Projects",
+				"AssetRegistry",
+				"GameFeatures",
+				"ModularGameplay"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
