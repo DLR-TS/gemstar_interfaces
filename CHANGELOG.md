@@ -1,6 +1,12 @@
 # Changelog for gemstar_interfaces Plugin
 
-## [2.0]
+## 2.0.1
+
+### Changed
+
+- Rename files
+
+## 2.0
 
 ### Added
 
@@ -25,5 +31,3 @@
 ### Changed
 
 - Update to OSI 3.8.0
-
-### Fixed

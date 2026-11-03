@@ -13,7 +13,7 @@
 #include "CoreMinimal.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "UObject/Interface.h"
-#include "GEMSTARRenderTargetSource.generated.h"
+#include "GemstarRenderTargetSource.generated.h"
 
 UINTERFACE(BlueprintType)
 class GEMSTAR_INTERFACES_API UGEMSTARRenderTargetSource : public UInterface
