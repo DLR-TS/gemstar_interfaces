@@ -50,7 +50,9 @@ struct FRadarConfigurationData {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SensorConfiguration")
 	float NumberOfRaysVertical = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SensorConfiguration")
-	float DistanceHalfFalloff = 2000.0;
+	float DistanceHalfFalloff = 200.0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SensorConfiguration")
+	float Range = 300.0;
 };
 
 USTRUCT(BlueprintType)
