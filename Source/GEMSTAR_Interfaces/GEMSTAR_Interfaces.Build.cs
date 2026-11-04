@@ -87,7 +87,8 @@ public class GEMSTAR_Interfaces : ModuleRules
 				"Core",
 				"CoreUObject",
 				"Engine",
-                "XmlParser",
+				"XmlParser",
+				"Projects"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -98,7 +99,6 @@ public class GEMSTAR_Interfaces : ModuleRules
 			{
 				"Slate",
 				"SlateCore",
-				"Projects",
 				"AssetRegistry",
 				"GameFeatures",
 				"ModularGameplay"

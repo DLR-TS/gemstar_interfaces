@@ -10,6 +10,7 @@
 #include "Subsystems/GemstarSimulationSubsystem.h"
 
 #include "Interfaces/IPluginManager.h"
+#include "PluginDescriptor.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Misc/PackageName.h"
@@ -42,9 +43,16 @@ FString UGemstarSimulationSubsystem::PluginNameOf(const AActor* Manager)
 	}
 
 	const FString Module = FPackageName::GetShortName(Manager->GetClass()->GetOutermost()->GetName());
-
-	if (const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().GetModuleOwnerPlugin(FName(*Module))) {
-		return Plugin->GetName();
+	const FName ModuleName(*Module);
+	for (const TSharedRef<IPlugin>& Plugin : IPluginManager::Get().GetEnabledPlugins())
+	{
+		for (const FModuleDescriptor& PluginModule : Plugin->GetDescriptor().Modules)
+		{
+			if (PluginModule.Name == ModuleName)
+			{
+				return Plugin->GetName();
+			}
+		}
 	}
 	return FString();
 }

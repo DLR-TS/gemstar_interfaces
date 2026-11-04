@@ -166,6 +166,8 @@ bool FGemstarExperienceScanPathsTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+// IsDataValid/FDataValidationContext only exist in editor builds.
+#if WITH_EDITOR
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FGemstarExperienceEsminiConflictTest,
 	"GEMSTAR.Experience.EsminiConflict",
 	EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::EngineFilter)
@@ -192,5 +194,6 @@ bool FGemstarExperienceEsminiConflictTest::RunTest(const FString& Parameters)
 
 	return true;
 }
+#endif // WITH_EDITOR
 
 #endif // WITH_DEV_AUTOMATION_TESTS
